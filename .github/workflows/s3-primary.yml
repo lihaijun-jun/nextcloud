@@ -56,7 +56,7 @@ jobs:
           echo '<?php $CONFIG=["${{ matrix.key }}" => ["class" => "OC\Files\ObjectStore\S3", "arguments" => ["bucket" => "nextcloud", "autocreate" => true, "key" => "minio", "secret" => "minio123", "hostname" => "localhost", "port" => 9000, "use_ssl" => false, "use_path_style" => true, "uploadPartSize" => 52428800]]];' > config/config.php
           ./occ maintenance:install --verbose --database=sqlite --database-name=nextcloud --database-host=127.0.0.1 --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass admin
           php -f index.php
-          echo '<?php $CONFIG=["redis" => ["host" => "localhost", "port" => 6379], "memcache.local" => "\\OC\\Memcache\\Redis"];' > config/redis.config.php
+          echo '<?php $CONFIG=["redis" => ["host" => "localhost", "port" => 6379], "memcache.local" => "\\\\OC\\\\Memcache\\\\Redis"];' > config/redis.config.php
 
       - name: Integration
         run: |
@@ -70,7 +70,7 @@ jobs:
         if: always()
         run: |
           docker ps -a
-          docker logs $(docker ps -aq)
+          docker ps -aq | while read container ; do IMAGE=$(docker inspect --format='{{.Config.Image}}' $container); echo $IMAGE; docker logs $container; echo "\n\n" ; done
 
 
   s3-primary-summary:
