@@ -839,7 +839,7 @@ class ShareByMailProvider implements IShareProvider {
 					$or1
 				)
 			);
-		} else if ($node === null) {
+		} elseif ($node === null) {
 			$qb->andWhere(
 				$qb->expr()->orX(
 					$qb->expr()->eq('uid_owner', $qb->createNamedParameter($userId)),

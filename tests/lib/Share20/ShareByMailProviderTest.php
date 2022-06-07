@@ -203,7 +203,7 @@ class ShareByMailProviderTest extends TestCase {
 		}
 
 		$this->assertEquals(1, $qb->execute());
-		return$qb->getLastInsertId();
+		return $qb->getLastInsertId();
 	}
 
 	public function testGetSharesByWithResharesAndNoNode() {
