@@ -10,14 +10,17 @@ npm-update:
 	npm update
 
 # Building
-build-js:
+build-js: build-css
 	npm run dev
 
 build-js-production:
 	npm run build
 
-watch-js:
+watch-js: build-css
 	npm run watch
+
+build-css:
+	npm run sass:icons
 
 # Linting
 lint-fix:
